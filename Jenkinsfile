@@ -7,41 +7,56 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/shankar-navali/MyMavenApp3.git'
+                // Checkout the project repository
+                git 'https://github.com/your-username/your-repo.git'  // Replace with your repository URL
             }
         }
 
         stage('Build') {
             steps {
-                sh 'mvn clean package'  // Run Maven build
+                script {
+                    // Build the project using Maven
+                    sh 'mvn clean install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'  // Run unit tests
+                script {
+                    // Run unit tests using Maven Surefire Plugin
+                    sh 'mvn test'
+                }
             }
         }
 
-        
-        
-       
-        stage('Run Application') {
+        stage('Run') {
             steps {
-                // Start the JAR application
-                sh 'java -jar target/MyMavenApp3-1.0-SNAPSHOT.jar'
+                script {
+                    // If you want to execute the app (useful for testing or deployment)
+                    // Example: Run the main class using Maven exec plugin
+                    sh 'mvn exec:java -Dexec.mainClass=com.example.App'
+                }
             }
         }
 
-        
+        stage('Deploy') {
+            steps {
+                script {
+                    // Add deployment steps here, for example, if you're deploying to a server or cloud
+                    echo 'Deploying application...'
+                }
+            }
+        }
     }
 
     post {
         success {
-            echo 'Build and deployment successful!'
+            echo 'Build and deployment were successful.'
         }
+
         failure {
-            echo 'Build failed!'
+            echo 'Build or deployment failed.'
         }
     }
 }
