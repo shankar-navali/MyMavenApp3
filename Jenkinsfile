@@ -8,7 +8,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the project repository
-                git 'https://github.com/your-username/your-repo.git'  // Replace with your repository URL
+                git 'https://github.com/shankar-navali/MyMavenApp3.git'  // Replace with your repository URL
             }
         }
 
