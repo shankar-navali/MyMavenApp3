@@ -35,7 +35,7 @@ pipeline {
                 script {
                     // If you want to execute the app (useful for testing or deployment)
                     // Example: Run the main class using Maven exec plugin
-                    sh 'mvn exec:java -Dexec.mainClass=com.example.App'
+                    sh 'java -jar target/MyMavenApp-1.0-SNAPSHOT.jar'
                 }
             }
         }
